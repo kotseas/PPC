@@ -1,0 +1,324 @@
+* {   
+    padding:0px;
+    margin:0px;  
+}
+
+h1 {
+    text-decoration: none;
+}
+#header {
+    display: block;
+    text-decoration: none;
+    margin-left: 45px;
+    margin-top: 16px;
+    width: 60px;
+    color:#000000;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+}
+#header:visited {
+    color:#000000;
+}
+body {
+    background:gainsboro;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+}
+#top{
+    position:fixed;
+    background:gainsboro;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid white;
+    z-index:100;
+}
+#left{
+    position:fixed;
+    background:white;
+    width:210px;    
+    top:70px;    
+    height:100%;
+    z-index:100;
+}
+#container {
+    display:table;
+    border-collapse:collapse;
+}
+
+#top nav{
+    position:relative;
+    margin-right:30px;
+    top:-35px;
+    float:right;    
+}
+#top nav ul ul {
+    display: none;
+}
+#top nav ul li:hover > ul {
+    display: block;
+}
+#top nav ul {   
+    padding: 0 20px;
+    list-style: none;
+    position: relative;
+    display: inline-table; 
+}
+#top nav ul:after {
+    content: ""; 
+    clear: both; 
+    display: block;
+}
+#top nav ul li {
+    float: left;     
+}
+#top nav ul li:hover {
+    background:white; 
+}
+#top nav ul li a {
+    display: block; 
+    padding: 5px 15px;    
+    min-width:80px;
+    border:1px solid silver;
+    text-decoration: none;
+    text-align:center;
+    color:black;
+}
+#top nav ul ul {
+    background: gainsboro;   
+    padding: 0;
+    position: absolute;
+    top: 100%;
+}
+#top nav ul ul li {
+    float: none;     
+    position: relative;
+}
+#top nav ul ul ul {
+    right: 100%; 
+    top:0;
+}
+#button_new input {
+    position:relative;  
+    top:27px;
+    left:45px;
+    padding: 4px 40px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_new input:hover {
+    background: darkred;
+    color: white;
+}
+#button_ok input {
+    position:relative;  
+    top:27px;
+    left:45px;
+    padding: 4px 46px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_ok input:hover {
+    background: darkred;
+    color: white;
+}
+#button_home input{
+    position:relative;  
+    top:27px;
+    left:45px;
+    padding: 4px 40px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_home input:hover {
+    background: darkred;
+    color: white;
+}
+#button_cancel input {
+    position:relative;  
+    top:15px;
+    left:45px;
+    padding: 4px 30px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_cancel input:hover {
+    background: darkred;
+    color: white;
+}
+#button_upload input {
+    position:relative;  
+    top:27px;
+    left:45px;
+    padding: 4px 46px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_upload input:hover {
+    background: darkred;
+    color: white;
+}
+#button_cancel1 input {
+    position:relative;  
+    top:42px;
+    left:45px;
+    padding: 4px 30px;
+    background:firebrick;
+    border:1px solid firebrick;
+    color: white;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_cancel1 input:hover {
+    background: darkred;
+    color: white;
+}
+
+#details1{
+    position: relative;  
+    top:70px;
+    left: 210px;
+    display:table;
+    width:80%;
+}
+#names1{
+    position:relative;
+    top:19px;
+    left:20px;
+    float:left;/*fix for  buggy browsers*/
+    width:10%; 
+}
+#values1{    
+    position:relative;
+    top:12px;
+    padding:8px;
+    left:20px;
+    float:left;/*fix for  buggy browsers*/
+    width:85%;
+}
+#values1 input{    
+    position:relative; 
+    width:900px;
+    float:left;/*fix for  buggy browsers*/
+    display:inline-block;        
+}
+#values1 textarea{    
+    position:relative;
+    left:-8px;
+    width: 900px;
+    height: 400px;
+    resize: none;
+    float:left;/*fix for  buggy browsers*/
+    display:inline-block;  
+}
+#code{
+    position:relative;
+    left:-10px; 
+    top:0px;
+}
+#or{
+    position:relative;  
+    left:150px; 
+    width:35px;
+}
+#upload{    
+    position:relative;
+    margin:0px 0px;;
+    padding:0px;
+    left:100px;    
+}
+#details {
+    position: relative;  
+    top:70px;
+    left: 210px;
+    display:table;
+    border-bottom: 1px solid white;
+    border-right:1px solid white;
+    height: 25px;
+    vertical-align: middle;
+    width: 1000px;
+}
+#names{
+    position:relative;
+    float:left;/*fix for  buggy browsers*/     
+    width:200px; 
+    padding-left: 10px;
+    padding-top:2px;
+    height: 25px;
+    overflow:hidden;
+}
+#values{    
+    position:relative;
+    float:left;/*fix for  buggy browsers*/     
+    width:666px;
+    height: 25px;
+    padding-top:2px;
+    overflow:hidden;
+}
+#time{    
+    position:relative;
+    text-align:right; /*fix for  buggy browsers*/
+    float:right;/*fix for  buggy browsers*/     
+    display:inline-block;        
+    width:100px;
+    padding-top:2px;
+    overflow:hidden;
+    margin-right: 10px;
+    height: 25px;
+}
+#home{    
+    position:fixed;
+    background:white;
+    width:210px;    
+    top:70px;    
+    height:100%;
+    z-index:100;    
+}
+#edit{    
+    position:fixed;
+    background:white;
+    width:210px;    
+    top:70px; 
+    left:0px;
+    height:100%;
+    z-index:100;    
+}
+#out{    
+    position:relative;
+    left:115px;
+    top:10px;
+    width:900px;       
+}
+#cancel{    
+    position:fixed;
+    background:white;
+    width:210px;    
+    top:130px; 
+    left:0px;
+    height:100%;
+    z-index:100;    
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Network settings" >
+	    <ListPreference
+	        android:title="Network communication"
+	        android:summary="Network connectivity required"
+	        android:key="listPref"
+	        android:defaultValue="Wi-Fi"
+	        android:entries="@array/listArray"
+	        android:entryValues="@array/listValues"
+	     />
+    </PreferenceCategory>
+
+</PreferenceScreen>

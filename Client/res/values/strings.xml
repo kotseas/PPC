@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Client</string>
+    <!--  Menu items -->
+    <string name="menu_settings">Settings</string>
+    <!--  Buttons -->
+    <string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+    <!--  NetworkActivity -->
+    <string name="lost_connection">No connection</string>
+    <string name="wifi_connected">Wi-Fi connected</string>
+    <string name="connection_error">Unable to establish connection</string>
+</resources>

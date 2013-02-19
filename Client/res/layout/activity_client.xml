@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".ClientActivity" >
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/comment"
+        android:layout_alignRight="@+id/comment"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/comment"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/levelService"
+	    android:layout_alignRight="@+id/levelService"
+	    android:layout_below="@+id/status"
+	    android:layout_marginTop="10dp"
+	    android:gravity="center" />
+
+	<TextView
+	    android:id="@+id/level"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/levelService"
+	    android:layout_alignLeft="@+id/levelService"
+	    android:layout_alignRight="@+id/levelService"
+	    android:gravity="center" />
+	<SeekBar
+	    android:id="@+id/levelService"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:layout_margin="10dp"
+	    android:max="100"
+	    android:progress="0"
+	    android:secondaryProgress="0" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/levelService"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/mid"
+        android:text="@string/ok"
+        android:width="100dp" />
+    <LinearLayout
+        android:id="@+id/mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" >
+    </LinearLayout>
+	<Button
+	    android:id="@+id/cancelButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="10dp"
+	    android:layout_alignLeft="@+id/mid"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignRight="@+id/levelService"
+	    android:text="@string/cancel"
+	    android:width="100dp" />
+
+</RelativeLayout>

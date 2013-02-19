@@ -1,0 +1,208 @@
+*{
+    padding:0px;
+    margin:0px;  
+}
+h1 {
+    text-decoration: none;
+}
+#header {
+    display: block;
+    text-decoration: none;
+    margin-left: 45px;
+    margin-top: 16px;
+    width: 60px;
+    color:#000000;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+}
+#header:visited {
+    color:#000000;
+}
+body {
+    background:white;
+}
+#top{
+    background:gainsboro;
+    position:fixed;
+    width:100%;
+    height:70px;
+    z-index:100;
+    border-bottom:1px solid white;
+}
+#top_letters{
+    position:relative;
+    float:right;  
+    top:-30px;
+    margin-right:200px;   
+}
+#welcome{
+    position: relative;
+    top:90px;
+    left:20px;   
+    width: 755px;   
+    height:590px;
+    background:white;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+}
+
+
+#new{    
+    text-align: left;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    color:black; 
+    position:relative;   
+}
+#wrapper_signin{
+    position: relative;
+    top:-500px;
+    left:600px;
+    margin: 0px 197px;	
+    width: 375px;   
+    height:340px;
+    background:gainsboro;
+}
+#wrapper_signup{
+    position: relative;
+    top:-500px;
+    left:698px;
+    margin: 0px 99px;	
+    width: 375px;   
+    height:590px;
+    background:gainsboro;
+}
+#button a {
+    position:relative;
+    float:right;
+    top:-30px;
+    margin-right: -260px; 
+    background:firebrick;
+    padding: 6px 15px;
+    color: white;
+    font-size: 12px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button a:hover {
+    background: darkred;    
+}
+#button_reg a {
+    position:relative;
+    float:right;
+    top:-30px;
+    margin-right: 34px;
+    margin-top:-1px;
+    background:gainsboro;
+    border:1px solid silver;
+    padding: 5px 15px;
+    color: black;
+    font-size: 13px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#button_reg a:hover {
+    background: #4b545f;
+    color: #ffffff;
+}
+#sign{
+    position:relative;
+    top:30px;
+    left:30px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    color:black;
+    width:320px;
+}
+#name_pass{
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    color:black;
+    position:relative;
+    top:45px;
+    left:30px;
+    font-weight:bold;
+    width:320px;
+}
+#values{
+    position:relative;
+    top:44px;   
+    left:30px;
+    width:320px;
+}
+#values input{
+    margin:10px 0px;    
+}
+#values p input{
+    width:315px;
+    height:30px;    
+}
+#message{
+    position:relative;
+    top:80px;
+    left:120px;   
+}
+#message_reg{
+    position:relative;
+    top:45px;
+    left:30px;   
+}
+#login input{
+    position:relative;
+    top:55px;
+    left:30px; 
+    background:firebrick;
+    padding: 6px 15px;
+    border:1px solid firebrick;
+    color: white;
+    font-weight:bold;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#login input:hover{    
+    background:darkred;
+}
+#sign_up input{
+    position:relative;
+    top:220px;
+    left:263px; 
+    background:firebrick;
+    padding: 6px 15px;
+    border:1px solid firebrick;
+    color: white;
+    font-weight:bold;
+    font-size: 14px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#sign_up input:hover{    
+    background:darkred;
+}
+#captcha{
+    position:relative;
+    top:20px;
+    left:30px;
+    width:320px;
+}
+
+#ppc{   
+    position:relative; 
+    top:20px;
+    left:20px;
+}
+#text1{
+    position:relative;
+    top:20px;
+}
+#text{
+    position:relative;
+    display:list-item;
+    top:30px;
+    left:20px;    
+}
+
+#last{
+     position:relative;
+    top:40px;
+    left:20px;
+}
