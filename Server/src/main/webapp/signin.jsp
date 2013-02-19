@@ -8,7 +8,7 @@
         <title></title>
     </head>
     <body>
-        <jsp:useBean id="signin" scope="session" class="com.www.server.SigninBean" >
+        <jsp:useBean id="signin" scope="request" class="com.www.server.SigninBean" >
             <jsp:setProperty name="signin" property="userName" value='<%=request.getParameter("user")%>'/>
             <jsp:setProperty name="signin" property="password" value='<%=request.getParameter("pass")%>'/>
         </jsp:useBean>

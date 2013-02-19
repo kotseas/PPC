@@ -35,10 +35,10 @@ public class FileService {
     String USERNAME = "root";
     String PASSWORD = "wwwwww";
     String USERS_INFO = "jdbc:mysql://localhost:3306/users_info";
-    String DB = "/var/lib/tomcat6/webapps/Server/DB";
-    //String DB = "C:/Users/Manos/Desktop/Login";
+    String DB = "C:/Users/Manos/Desktop/Server/DB";
+    String DX = "C:/Program Files/Android/sdk/platform-tools/dx";
+    //String DB = "/var/lib/tomcat6/webapps/Server/DB";
     //String DX = "/opt/android-sdk/platform-tools/dx";
-    //String DX = "C:/Program Files/Android/sdk/platform-tools/dx";
     @Context
     UriInfo uriInfo;
     @Context

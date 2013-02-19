@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--%String url = "http://83.212.101.72:8080/Server/";%-->
-<% String url = "http://localhost:8084/Server"; %>
+<%String url = "http://localhost:8084/Server";%>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -16,8 +15,8 @@
         <div id="top">
             <a id="header" href=<%= url + "/index.jsp"%>><h1>PPC</h1></a>  
             <div id="new">
-                <div id="top_letters">  New to PPC ?</div>
-                <div id="button""><a href="signup.jsp" class="to_register">CREATE AN ACCOUNT</a></div>
+                <div id="top_letters">New to PPC?</div>
+                <div id="button""><a href="signup.jsp" class="to_register">JUST BE PATIENT :)</a></div>
             </div>
         </div>
         <section>      

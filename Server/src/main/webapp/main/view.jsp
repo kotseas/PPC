@@ -17,15 +17,14 @@
 <%@page import="org.jdom.Element" %>
 <%@page import="org.jdom.JDOMException" %>
 <%@page import="org.jdom.input.SAXBuilder" %>
-<%@page import="java.io.IOException;" %>
+<%@page import="java.io.IOException" %>
 <%@page import="java.lang.*" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
+<!DOCTYPE html>
+<% String xmlPath = "C:/Users/Manos/Desktop/Server/DB";%>
+<%String url = "http://localhost:8084/Server";%>
 <html>
-    <%String url = "http://83.212.101.72:8080/Server/";%>
-<%String xmlPath = "/var/lib/tomcat6/webapps/Server/DB";%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="../ppc.ico" />

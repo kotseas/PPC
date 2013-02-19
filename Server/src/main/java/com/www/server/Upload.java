@@ -10,7 +10,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.*;
-import javax.servlet.http.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import org.apache.commons.fileupload.*;
@@ -23,6 +22,9 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class Upload extends HttpServlet {
 
@@ -71,13 +73,16 @@ public class Upload extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         String message = "";
+        //Http session = null;
 
         try {
             List fileItems = upload.parseRequest(request);
             Iterator i = fileItems.iterator();
+            FileItem fi = null;
+            FileItem code = null;
 
             while (i.hasNext()) {
-                FileItem fi = (FileItem) i.next();
+                fi = (FileItem) i.next();
                 String fieldName = fi.getFieldName();
                 if (fieldName.equals("comment")) {
                     fileComment = fi.getString();
@@ -104,7 +109,7 @@ public class Upload extends HttpServlet {
                     } else {
                         areaCode = true;
                     }
-                    if (areaCode) {
+                    if (areaCode == true) {
                         if (!nameArea) {
                             message = "Give name to your file please";
                             request.setAttribute("message", message);
@@ -116,67 +121,80 @@ public class Upload extends HttpServlet {
                 }
                 if (!fi.isFormField()) {
                     fileName = fi.getName();
-                    //System.out.println(fileName);
+                    code = fi;
+                    System.out.println(fileName);
                     if ((fileName == null) || (fileName.equals(""))) {
                         uploadCode = false;
                     } else {
                         uploadCode = true;
                     }
-                    //-----CASE:1 upload and textarea both-----//
-                    if (uploadCode && areaCode) {
-                        message = "Only one code";
-                        request.setAttribute("message", message);
-                        RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
-                        view.forward(request, response);
-                    }//-----CASE:2 no upload no textarea-----//
-                    else if ((!uploadCode) && (!areaCode)) {
-                        message = "Give some code";
-                        request.setAttribute("message", message);
-                        RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
-                        view.forward(request, response);
-                    }//-----CASE:3 only upload no textarea-----//
-                    else if (uploadCode && !areaCode) {
-                        if (nameArea) {
-                            message = "Only one name";
-                            request.setAttribute("message", message);
-                            RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
-                            view.forward(request, response);
-                            break;
-                        } else {
-                            if (fileName.substring(fileName.lastIndexOf(".") + 1).equalsIgnoreCase("java")) {
-                                getValues(fileName);
-                                new File(fileFolder).mkdir();
-                                String location = (fileFolder + "/" + fileName);
-                                File file = new File(location);
-                                fi.write(file);
-                                long size = fi.getSize();
-                                sizeFile = Long.toString(size) + "B";
-                                composeXml(fileName);
-                                compileFile(userNameF, fileName, fileId);
-                                response.sendRedirect(response.encodeRedirectURL("XmlParser"));
-                            } else {
-                                message = "The file must be a .java file";
-                                request.setAttribute("message", message);
-                                RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
-                                view.forward(request, response);
-                                break;
-                            }
-                        }
-                    } //-----CASE:4 no upload only textarea-----//
-                    else if (!uploadCode && areaCode) {
-                        getValues(fileName1 + ".java");
-                        new File(fileFolder).mkdir();
-                        File fileCode = new File(fileFolder + "/" + fileName1 + ".java");
-                        fileWriter = new FileWriter(fileCode);
-                        fileWriter.write(newCode);
-                        fileWriter.close();
-                        long size = fileCode.length();
-                        sizeFile = Long.toString(size) + "B";
-                        composeXml(fileName1 + ".java");
-                        response.sendRedirect(response.encodeRedirectURL("XmlParser"));
-                    }
+
                 }
             }
+            System.out.println(areaCode);
+            System.out.println(uploadCode);
+            //-----CASE:1 upload and textarea both-----//
+            if (uploadCode == true && areaCode == true) {
+                message = "Only one code";
+                request.setAttribute("message", message);
+                RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
+                view.forward(request, response);
+            }//-----CASE:2 no upload no textarea-----//
+            else if ((uploadCode == false) && (areaCode == false)) {
+                message = "Give some code";
+                request.setAttribute("message", message);
+                RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
+                view.forward(request, response);
+            }//-----CASE:3 only upload no textarea-----//
+            else if (uploadCode == true && areaCode == false) {
+                if (nameArea) {
+                    message = "Only one name";
+                    request.setAttribute("message", message);
+                    RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
+                    view.forward(request, response);
+                    //break;
+                } else {
+                    System.out.println("in1");
+                    if (fileName.substring(fileName.lastIndexOf(".") + 1).equalsIgnoreCase("java")) {
+                        System.out.println("in2");
+                        getValues(fileName);
+                        System.out.println("in3");
+                        new File(fileFolder).mkdir();
+                        String location = (fileFolder + "/" + fileName);
+                        File file = new File(location);
+                        code.write(file);
+                        long size = file.length();
+                        sizeFile = Long.toString(size) + "B";
+                        System.out.println("in4");
+                        composeXml(fileName);
+                        System.out.println("in5");
+                        compileFile(userNameF, fileName, fileId);
+                        System.out.println("in6");
+                        response.sendRedirect(response.encodeRedirectURL("XmlParser"));
+                    } else {
+                        message = "The file must be a .java file";
+                        request.setAttribute("message", message);
+                        RequestDispatcher view = request.getRequestDispatcher("main/upload.jsp");
+                        view.forward(request, response);
+                        //break;
+                    }
+                }
+            } //-----CASE:4 no upload only textarea-----//
+            else if (uploadCode == false && areaCode == true) {
+                getValues(fileName1 + ".java");
+                new File(fileFolder).mkdir();
+                File fileCode = new File(fileFolder + "/" + fileName1 + ".java");
+                fileWriter = new FileWriter(fileCode);
+                fileWriter.write(newCode);
+                fileWriter.close();
+                long size = fileCode.length();
+                sizeFile = Long.toString(size) + "B";
+                composeXml(fileName1 + ".java");
+                compileFile(userNameF, fileName1 + ".java", fileId);
+                response.sendRedirect(response.encodeRedirectURL("XmlParser"));
+            }
+
+
 
         } catch (Exception ex) {
         }
@@ -238,7 +256,7 @@ public class Upload extends HttpServlet {
     }
 
     protected void getValues(String NameOfFile) throws ClassNotFoundException, SQLException {
-        //System.out.println("3");
+        System.out.println("1");
         String file_Name = NameOfFile;
         String connectionURL = USERS_INFO;
         Connection connection = null;
@@ -246,16 +264,15 @@ public class Upload extends HttpServlet {
         connection = DriverManager.getConnection(connectionURL, USERNAME, PASSWORD);
         ResultSet rs;
         Statement s = connection.createStatement();
+        System.out.println("2");
         s.executeUpdate("UPDATE down_up SET id = (id + 1) WHERE status='upload'");
         String sql = "SELECT id FROM down_up WHERE status='upload'";
         rs = s.executeQuery(sql);
         rs.next();
         fileId = rs.getString("id");
         String sql2 = "INSERT INTO users_info.file_id (`username`, `id` ,`filename`) VALUES ('" + userNameF + "', '" + fileId + "','" + file_Name + "')";
-        //ResultSet res = s.executeQuery("SELECT COUNT(*) FROM file_id");
-        //res.next();
-        //res.deleteRow();
         s.executeUpdate(sql2);
+        System.out.println("3");
         DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calen = Calendar.getInstance();
         fileDate = calen.getTime();
@@ -266,7 +283,7 @@ public class Upload extends HttpServlet {
         timeFile = time.format(fileTime);
         userPath = Path + "/" + userNameF;
         fileFolder = userPath + "/" + fileId;
-        //System.out.println(fileFolder);
+        System.out.println(fileFolder);
         new File(fileFolder).mkdir();
         rs.close();
         s.close();

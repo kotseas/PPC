@@ -13,8 +13,7 @@ public class SigninFilter implements Filter {
     //String url = "http://83.212.101.72:8080/Server/";
     String url = "http://localhost:8084/Server/";
     @Override
-    public void init(FilterConfig filterConfig) {
-    }
+    public void init(FilterConfig filterConfig) {}
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;

@@ -76,7 +76,7 @@
     <context-param>
         <description>the main location</description>
         <param-name>mainPath</param-name>
-        <param-value>C:/Users/Manos/Desktop/Login</param-value>
+        <param-value>C:/Users/Manos/Desktop/Server/DB</param-value>
     </context-param>
     <context-param>
         <param-name>username</param-name>
@@ -92,7 +92,7 @@
     </context-param>
     <context-param>
         <param-name>library</param-name>
-        <param-value>C:/Users/Manos/Desktop/android.jar</param-value>
+        <param-value>C:/Users/Manos/Desktop/Server/DB/android.jar</param-value>
     </context-param>
     <context-param>
         <param-name>console</param-name>
@@ -110,7 +110,6 @@
         <param-name>url</param-name>
         <param-value>http://localhost:8084/Server</param-value>
     </context-param>
-
     <session-config>
         <session-timeout>
             30

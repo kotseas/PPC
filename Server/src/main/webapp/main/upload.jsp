@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%String url = "http://83.212.101.72:8080/Server/";%>
-<!--%String url = "http://localhost:8084/Server";%-->
+<%String url = "http://localhost:8084/Server";%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
