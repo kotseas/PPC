@@ -65,7 +65,7 @@ public class FileService extends Service {
 	private static String log = "";
 	private static boolean wifiConnected = false;
 	private static boolean mobileConnected = false;
-	public static boolean isConnected = true;
+	public static boolean isConnected = false;
 	private static NetworkReceiver networkReceiver = null;
 	private static HttpGet httpGet = null;
 	private static HttpPost httpPost = null;
@@ -172,8 +172,11 @@ public class FileService extends Service {
 			else if(sharedPreferences.getString("exeStatus", "EXECUTE").equals("END")) {
 				classToLoad = null;
 				Log.i(TAG, "END");
-				editor.putString("serviceStatus", "DOWNLOAD");
 				editor.putString("fileName", "");
+				editor.putString("className", "");
+				editor.putBoolean("logStatus", true);
+				editor.putInt("exeCounter", 0);
+				editor.putString("serviceStatus", "DOWNLOAD");
 				editor.commit();
 				download();
 			}
@@ -181,19 +184,17 @@ public class FileService extends Service {
 	}
 
 	public void onStop() {
-		if(httpGet != null) {
-			httpGet.abort();
-			if(downloadTask != null) downloadTask.cancel(true);
-			if(checkDownloadTask != null) checkDownloadTask.cancel(true);
-			if(reDownloadTask != null) {
-				reDownloadTask.cancel(true);
-				if(sharedPreferences.getString("serviceStatus", "DOWNLOAD").equals("RE_DOWNLOAD")) {
-					editor.putString("serviceStatus", "CHECK_DOWNLOAD");
-					editor.commit();
-				}
+		if(httpGet != null) httpGet.abort();
+		if(httpPost != null) httpPost.abort();
+		if(downloadTask != null) downloadTask.cancel(true);
+		if(checkDownloadTask != null) checkDownloadTask.cancel(true);
+		if(reDownloadTask != null) {
+			reDownloadTask.cancel(true);
+			if(sharedPreferences.getString("serviceStatus", "DOWNLOAD").equals("RE_DOWNLOAD")) {
+				editor.putString("serviceStatus", "CHECK_DOWNLOAD");
+				editor.commit();
 			}
 		}
-		if(httpPost != null) httpPost.abort();
 		if(logTask != null) logTask.cancel(true);
 		if(uploadTask != null) uploadTask.cancel(true);
 		if(checkUploadTask != null) checkUploadTask.cancel(true);
@@ -202,7 +203,7 @@ public class FileService extends Service {
 				method = classToLoad.getMethod("destroy");
 				method.invoke(object);
 				method = classToLoad.getMethod("getCounter");
-				editor.putInt("counter", (Integer)method.invoke(object));
+				editor.putInt("exeCounter", (Integer)method.invoke(object));
 				editor.commit();
 				method = classToLoad.getMethod("getLog");
 				String newLog = (String)method.invoke(object);
@@ -298,7 +299,7 @@ public class FileService extends Service {
 			classToLoad = (Class<Object>) classLoader.loadClass(className);
 			object = classToLoad.newInstance();
 			method = classToLoad.getMethod("main", new Class[] { Context.class, int.class });
-			method.invoke(object, new Object[] { this.getApplicationContext(), sharedPreferences.getInt("counter", 0) });
+			method.invoke(object, new Object[] { this.getApplicationContext(), sharedPreferences.getInt("exeCounter", 0) });
 			editor.putString("exeStatus", "LOG");
 			editor.commit();
 		} catch (ClassNotFoundException e) {
@@ -412,6 +413,7 @@ public class FileService extends Service {
 		protected void onPostExecute(String result) {
 			Log.i(TAG, "CheckDownloadTask: " + result);
 			if(result.equals("OK")) {
+				//editor.putString("serviceStatus", "DOWNLOAD");
 				editor.putString("serviceStatus", "EXECUTE");
 				editor.putString("exeStatus", "EXECUTE");
 				editor.commit();
@@ -423,6 +425,7 @@ public class FileService extends Service {
 			else {
 				editor.putString("serviceStatus", "DOWNLOAD");
 				editor.putString("fileName", "");
+				editor.putString("className", "");
 				editor.commit();
 				file.delete();
 			}
@@ -477,13 +480,12 @@ public class FileService extends Service {
 				if(log != null && !log.isEmpty()) {
 					Log.i(TAG, "LogTask: " + log);
 					try {
-						//counter = (Integer)method.invoke(object);
 						method = classToLoad.getMethod("getCounter");
-						editor.putInt("counter", (Integer)method.invoke(object));
+						editor.putInt("exeCounter", (Integer)method.invoke(object));
 						editor.putString("exeStatus", "UPLOAD");
 						editor.commit();
 						writeToFile(CLIENT + "/" + fileName + "/" + fileName + ".log.part", log);
-						log = "";
+						//log = "";
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (NoSuchMethodException e) {
@@ -559,8 +561,6 @@ public class FileService extends Service {
 				}
 				else {
 					editor.putString("exeStatus", "END");
-					editor.putString("fileName", "");
-					editor.putString("serviceStatus", "DOWNLOAD");
 					editor.commit();
 				}
 			}
@@ -667,6 +667,7 @@ public class FileService extends Service {
 		if(!file.exists()) file.createNewFile();
 		FileWriter fileWriter = new FileWriter(file, true);
 		fileWriter.write(string);
+		log = "";
 		close(fileWriter);
 		if(searchStringFor(string, "{EOL}")) {
 			editor.putBoolean("logStatus", false);
@@ -685,10 +686,7 @@ public class FileService extends Service {
 		public void onReceive(Context context, Intent intent) {
 			ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-			if((WIFI.equals(sharedPreferences.getString("listPref", "Wi-Fi")) && networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) ||
-					(ANY.equals(sharedPreferences.getString("listPref", "Wi-Fi")) && networkInfo != null)) {
-				//isConnected = true;
-				//if(!isRunning) onStart();
+			if((WIFI.equals(sharedPreferences.getString("listPref", "Wi-Fi")) && networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) || (ANY.equals(sharedPreferences.getString("listPref", "Wi-Fi")) && networkInfo != null)) {
 				if(!isConnected) {
 					onStop();
 					isConnected = true;
@@ -702,7 +700,7 @@ public class FileService extends Service {
 	private boolean isOnline() {
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-		if (activeInfo != null && activeInfo.isConnected()) {
+		if(activeInfo != null && activeInfo.isConnected()) {
 			wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
 			mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
 		}
